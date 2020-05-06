@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import {Currency} from './Currency'
 import {GlobalContext} from '../context/GlobalState';
 
 export const Expenses = () => {
@@ -15,13 +16,13 @@ export const Expenses = () => {
       <div>
         <h4>Income</h4>
         <p className="money plus">
-          +{income.toLocaleString('en-US', { style: 'currency', currency: 'USD', })}
+          +<Currency amount={income}/>
         </p>
       </div>
       <div>
         <h4>Expense</h4>
         <p className="money minus">
-          {expense.toLocaleString('en-US', { style: 'currency', currency: 'USD', })}
+          <Currency amount={expense}/>
         </p>
       </div>
     </div>

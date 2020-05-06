@@ -149,3 +149,7 @@ input[type='number'] {
 .list li:hover .delete-btn {
   opacity: 1;
 }
+
+#currency {
+  float: right;
+}

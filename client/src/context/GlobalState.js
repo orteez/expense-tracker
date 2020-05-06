@@ -3,7 +3,8 @@ import AppReducer from './AppReducer'
 
 // initial state
 const initialState = {
-  transactions: []
+  transactions: [],
+  currency: "USD"
 }
 
 // Create Context
@@ -25,8 +26,15 @@ export const GlobalProvider = ({ children }) => {
       payload: transaction
     })
   }
+
+  const changeCurrency = (currency) => {
+    dispatch({
+      type: "CHANGE_CURRENCY",
+      payload: currency
+    })
+  }
   return (
-    <GlobalContext.Provider value={{transactions: state.transactions, deleteTransaction, addTransaction}}>
+    <GlobalContext.Provider value={{transactions: state.transactions, deleteTransaction, addTransaction, changeCurrency,  currency: state.currency}}>
       {children}
     </GlobalContext.Provider>
   )

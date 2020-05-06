@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import {GlobalContext} from '../context/GlobalState';
+import {Currency} from './Currency'
 
 export const Transaction = (props) => {
   const {deleteTransaction} = useContext(GlobalContext);
@@ -9,7 +10,7 @@ export const Transaction = (props) => {
   return (
     <li className={name}>
       {text}
-      <span>{amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', })} </span>
+      <span><Currency amount={amount}/> </span>
       <button className="delete-btn" onClick={() => deleteTransaction(id)}>x</button>
     </li>
   )

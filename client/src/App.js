@@ -6,6 +6,8 @@ import { Expenses } from './components/Expenses'
 import { TransactionList } from './components/TransactionList'
 import { AddTransaction } from './components/AddTransaction'
 
+import { ChangeCurrency } from './components/ChangeCurrency'
+
 import {GlobalProvider} from './context/GlobalState';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Expenses />
         <TransactionList />
         <AddTransaction />
+        <ChangeCurrency/>
       </div>
     </GlobalProvider>
   );
