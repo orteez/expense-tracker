@@ -14,13 +14,17 @@ export const ChangeCurrency = () => {
     changeCurrency(e.target.value)
   }
   return (
+    <>
     <h3>
       Currency
-      <select id="currency" onChange={onSelectCurrency}>
+    </h3>
+    <div className="currency">
+      <select onChange={onSelectCurrency}>
         {currencies.map((currency) => (
           <option value={currency.currency}>{currency.currency}</option>
         ))}
-      </select>
-    </h3>
+      </select>  
+    </div>
+    </>
   )
 }
