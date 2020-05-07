@@ -1,4 +1,5 @@
 import React, {createContext, useReducer} from 'react'
+import axios from 'axios'
 import AppReducer from './AppReducer'
 
 // initial state
@@ -14,17 +15,51 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  const deleteTransaction = (id) => {
-    dispatch({
-      type: "DELETE_TRANSACTION",
-      payload: id
-    })
+  const getTransactions = async () => {
+    try {
+      const res = await axios.get('/api/transaction');
+      console.log(res)
+      dispatch({
+        type: 'GET_TRANSACTIONS',
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error
+      });
+    }
   }
-  const addTransaction = (transaction) => {
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: transaction
-    })
+
+  const deleteTransaction = async (id) => {
+    try {
+      const res = await axios.delete(`/api/transaction/${id}`);
+      console.log(res)
+      dispatch({
+        type: 'DELETE_TRANSACTION',
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error
+      });
+    }
+  }
+
+  const addTransaction = async (transaction) => {
+    try {
+      const res = await axios.post('/api/transaction', transaction);
+      dispatch({
+        type: 'ADD_TRANSACTION',
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error
+      });
+    }
   }
 
   const changeCurrency = (currency) => {
@@ -34,7 +69,14 @@ export const GlobalProvider = ({ children }) => {
     })
   }
   return (
-    <GlobalContext.Provider value={{transactions: state.transactions, deleteTransaction, addTransaction, changeCurrency,  currency: state.currency}}>
+    <GlobalContext.Provider value={{
+      transactions: state.transactions, 
+      currency: state.currency,
+      deleteTransaction, 
+      addTransaction, 
+      changeCurrency,
+      getTransactions
+    }}>
       {children}
     </GlobalContext.Provider>
   )

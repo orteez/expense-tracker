@@ -1,5 +1,4 @@
 import React, {useState, useContext} from 'react'
-import uuid from 'react-uuid'
 import { GlobalContext } from '../context/GlobalState'
 
 export const AddTransaction = () => {
@@ -13,12 +12,13 @@ export const AddTransaction = () => {
   const onAddTransaction = (e) => {
     e.preventDefault();
     const transaction = {
-      id: uuid(),
       text,
       amount: +amount // change type to number
     }
     console.log(transaction)
     addTransaction(transaction);
+    setText("")
+    setAmount(0)
   }
 
   return (

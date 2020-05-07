@@ -1,14 +1,12 @@
 # expense-tracker
-React, Golang, CouchDB
+React, Golang, Postgres
 
 ## Front-End - React
 - Global Context
 - Hooks
 
+## Note
 
-## Back-End - Golang
-
-
-## Database
+Tracker allows visual change of currency symbol but does not convert currency amount between changes.
 
 

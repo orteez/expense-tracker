@@ -21,7 +21,7 @@ export const ChangeCurrency = () => {
     <div className="currency">
       <select onChange={onSelectCurrency}>
         {currencies.map((currency) => (
-          <option value={currency.currency}>{currency.currency}</option>
+          <option key={currency.currency} value={currency.currency}>{currency.currency}</option>
         ))}
       </select>  
     </div>
