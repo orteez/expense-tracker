@@ -21,9 +21,8 @@ func logFatal(err error) {
 var db *pgx.Conn
 
 func init() {
-
 	godotenv.Load()
-	conn, err := pgx.Connect(context.Background(), os.Getenv("ELEPHANTSQL_URL"))
+	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
 	db = conn
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
@@ -70,8 +69,7 @@ func DeleteExpense(id int) {
 
 // AddExpense add expense into database
 func EditExpense(expense models.Expense) {
-	res, err := db.Exec(context.Background(), "UPDATE expense SET amount=$1, text=$2 WHERE id=$3", expense.Amount, expense.Text, expense.ID)
+	res, err := db.Exec(context.Background(), "UPDATE expenses SET amount=$1, text=$2 WHERE id=$3", expense.Amount, expense.Text, expense.ID)
 	logFatal(err)
 	log.Println(res)
-
 }

@@ -5,7 +5,8 @@ import AppReducer from './AppReducer'
 // initial state
 const initialState = {
   transactions: [],
-  currency: "USD"
+  currency: "USD",
+  error: null
 }
 
 // Create Context
@@ -62,12 +63,29 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  const editTransaction = async (transaction) => {
+    try {
+      const res = await axios.put(`/api/transaction/${transaction.id}/edit`, transaction);
+      console.log(res)
+      dispatch({
+        type: 'EDIT_TRANSACTION',
+        payload: res.data
+      })
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error
+      });
+    }
+  }
+
   const changeCurrency = (currency) => {
     dispatch({
       type: "CHANGE_CURRENCY",
       payload: currency
     })
   }
+  
   return (
     <GlobalContext.Provider value={{
       transactions: state.transactions, 
@@ -75,7 +93,8 @@ export const GlobalProvider = ({ children }) => {
       deleteTransaction, 
       addTransaction, 
       changeCurrency,
-      getTransactions
+      getTransactions,
+      editTransaction
     }}>
       {children}
     </GlobalContext.Provider>
