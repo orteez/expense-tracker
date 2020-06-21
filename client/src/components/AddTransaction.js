@@ -26,7 +26,7 @@ export const AddTransaction = () => {
   return (
     <>
       <h3>Add new transaction</h3>
-      <Form onSubmit={onAddTransaction}>
+      <Form className="form" onSubmit={onAddTransaction}>
         <FormGroup>
           <Label for="exampleEmail">Text</Label>
           <Input type="text" placeholder="Enter text..." value={text} onChange={onTextChange} />
