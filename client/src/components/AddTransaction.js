@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react'
 import { GlobalContext } from '../context/GlobalState'
 
+import {Input, FormGroup, Form, Label} from 'reactstrap'
+
 export const AddTransaction = () => {
   const {addTransaction} = useContext(GlobalContext);
   const [text, setText] = useState('');
@@ -24,17 +26,17 @@ export const AddTransaction = () => {
   return (
     <>
       <h3>Add new transaction</h3>
-      <form onSubmit={onAddTransaction}>
-        <div className="form-control">
-          <label htmlFor="text">Text</label>
-          <input type="text" placeholder="Enter text..." value={text} onChange={onTextChange} />
-        </div>
-        <div className="form-control">
-          <label htmlFor="amount"> Amount <span style={{fontSize: ".75em"}}>(negative - expense, positive - income)</span> </label>
-          <input type="number" placeholder="Enter amount..." value={amount} onChange={onAmountChange} />
-        </div>
+      <Form onSubmit={onAddTransaction}>
+        <FormGroup>
+          <Label for="exampleEmail">Text</Label>
+          <Input type="text" placeholder="Enter text..." value={text} onChange={onTextChange} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="examplePassword">Amount <span style={{fontSize: ".75em"}}>(negative - expense, positive - income)</span></Label>
+          <Input type="number" placeholder="Enter amount..." value={amount} onChange={onAmountChange} />
+        </FormGroup>
         <button className="btn">Add transaction</button>
-      </form>
+      </Form>
     </>
   )
 }
