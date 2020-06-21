@@ -5,53 +5,44 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
+    NavItem
 } from 'reactstrap';
+import { LinkContainer } from "react-router-bootstrap";
+import { withRouter } from "react-router-dom";
+import Routes from '../Routes';
 
 const AppNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+
     return (
-        <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">reactstrap</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-                <Nav className="mr-auto" navbar>
-                    <NavItem>
-                        <NavLink href="/components/">Components</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                    </NavItem>
-                    <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>
-                            Options
-              </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem>
-                                Option 1
-                </DropdownItem>
-                            <DropdownItem>
-                                Option 2
-                </DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>
-                                Reset
-                </DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
-                </Nav>
-                <NavbarText>Simple Text</NavbarText>
-            </Collapse>
-        </Navbar>
+        <>
+            <Navbar color="light" light expand="md">
+                <LinkContainer to="/">
+                    <NavbarBrand>Expense Tracker</NavbarBrand>
+                </LinkContainer>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <LinkContainer to="/">
+                            <NavItem>
+                                Home
+                            </NavItem>
+                        </LinkContainer>
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <LinkContainer to="/signup">
+                            <NavItem>
+                                Sign Up
+                            </NavItem>
+                        </LinkContainer>
+                    </Nav>
+                </Collapse>
+            </Navbar>
+            <Routes />
+        </>
     )
 }
 
-export default AppNavbar;
+export default withRouter(AppNavbar);
